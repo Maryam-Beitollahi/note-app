@@ -1,5 +1,5 @@
-
 function NoteHeader({ notes, sortBy, onSort }) {
+  //const [sortBy, setSortBy] = useState("latest");//lift to parent(App)
 
   return (
     <div className="note-header">

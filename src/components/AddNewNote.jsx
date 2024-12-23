@@ -1,46 +1,51 @@
 import { useState } from "react";
 
 function AddNewNote({ onAddNote }) {
-  const [title, setTtile] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!title || !description) return null;
-
+    if (!title || !desc) return null;
     const newNote = {
       title,
-      description,
+      desc,
       id: Date.now(),
       completed: false,
       createdAt: new Date().toISOString(),
     };
+    setTitle("");
+    setDesc("");
+    //update notes
     onAddNote(newNote);
-    setTtile("");
-    setDescription("");
   };
-
+  const handleChange = (e) => {
+    //console.log(e.target.value);
+    setTitle(e.target.value);
+  };
+  const handleDesc = (e) => {
+    setDesc(e.target.value);
+  };
   return (
     <div className="add-new-note">
-      <h2>Add New Note</h2>
+      <h2>Add new note</h2>
       <form className="note-form" onSubmit={handleSubmit}>
         <input
           value={title}
-          onChange={(e) => setTtile(e.target.value)}
+          onChange={handleChange} // onChange = {(e) => setTitle(e.target.value)}
           type="text"
           className="text-field"
-          placeholder="Note title"
+          placeholder="Note title..."
         />
         <input
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={desc}
+          onChange={handleDesc}
           type="text"
           className="text-field"
-          placeholder="Note description"
+          placeholder="Note desc..."
         />
         <button type="submit" className="btn btn--primary">
-          Add New Note
+          Add new note
         </button>
       </form>
     </div>
